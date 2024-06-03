@@ -1,9 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +22,54 @@ use App\Http\Controllers\SupplierController;
 |
 */
 
+ // Prevent Back Middleware
+
+Route::group(['middleware' => 'prevent-back-history'], function() {
+    
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth','verified'])->group(function() {
+Route::get('/dashboard', [CustomerController::class, 'CustomerDashboard'])->name('dashboard');
+Route::post('/customer/profile/store', [CustomerController::class, 'CustomerProfileStore'])->name('customer.profile.store');
+Route::get('/customer/logout', [CustomerController::class, 'CustomerLogout'])->name('customer.logout');
+Route::post('/customer/update/password', [CustomerController::class, 'CustomerUpdatePassword'])->name('customer.update.password');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+}); 
+
+/// Supplier Dashboard
+
+
+    Route::middleware(['auth', 'verified', 'role:supplier'])->group(function() {
+    Route::get('/supplier/login', [SupplierController::class, 'SupplierLogin'])->name('supplier.login');
+    Route::get('/supplier/dashboard', [SupplierController::class, 'SupplierDashboard'])->name('supplier.dashboard');
+    Route::get('/supplier/logout', [SupplierController::class, 'SupplierDestroy'])->name('supplier.logout');
+    Route::get('/supplier/profile', [SupplierController::class, 'SupplierProfile'])->name('supplier.profile');
+    Route::post('/supplier/profile/store', [SupplierController::class, 'SupplierProfileStore'])->name('supplier.profile.store');
+    Route::get('/supplier/change/password', [SupplierController::class, 'SupplierChangePassword'])->name('supplier.change.password');
+    Route::post('/supplier/update/password', [SupplierController::class, 'SupplierUpdatePassword'])->name('supplier.update.password');
 });
 
-require __DIR__.'/auth.php';
+    
+// Group Milldeware End
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+//     Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+
+
+// require __DIR__.'/auth.php';
 
 /// Admin Dashboard
 
@@ -45,13 +84,37 @@ Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassw
 
 });
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
-/// Supplier Dashboard
+Route::put('reset-password', [NewPasswordController::class, 'store'])
+     ->name('password.update');
 
 
-Route::middleware(['auth','role:supplier'])->group(function() {
-Route::get('/supplier/dashboard', [SupplierController::class, 'SupplierDashboard'])->name('supplier.dashboard');
 
+
+// Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
+// Route::get('/supplier/login', [SupplierController::class, 'SupplierLogin'])->name('supplier.login');
+Route::get('/become/supplier', [SupplierController::class, 'BecomeSupplier'])->name('become.supplier');
+Route::post('/supplier/register', [SupplierController::class, 'SupplierRegister'])->name('supplier.register');
+
+ // Email verification
+    Route::middleware(['auth', 'signed'])->group(function () {
+        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+            $request->fulfill();
+            $user = $request->user();
+
+            // Determine the redirection URL based on user role
+            $redirectUrl = match($user->role) {
+                'admin' => route('admin.dashboard'),
+                'supplier' => route('/supplier/dashboard'),
+                'customer' => route('dashboard'),
+                default => route('login'), // Redirect to login if role is not recognized
+            };
+
+            return redirect()->intended($redirectUrl);
+        })->name('verification.verify');
+    });
 });
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
+// Load authentication routes
+require __DIR__.'/auth.php';
