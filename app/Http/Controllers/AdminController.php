@@ -98,5 +98,62 @@ class AdminController extends Controller
 
     } // End Mehtod 
 
+    public function InactiveSupplier(){
+        $inActiveSupplier = User::where('status','inactive')->where('role','supplier')->latest()->get();
+        return view('backend.supplier.inactive_supplier',compact('inActiveSupplier'));
+
+    }// End Mehtod
+    public function ActiveSupplier(){
+        $ActiveSupplier = User::where('status','active')->where('role','supplier')->latest()->get();
+        return view('backend.supplier.active_supplier',compact('ActiveSupplier'));
+
+    }// End Mehtod
+
+    public function InactiveSupplierDetails($id){
+
+        $inactiveSupplierDetails = User::findOrFail($id);
+        return view('backend.supplier.inactive_supplier_details',compact('inactiveSupplierDetails'));
+
+    }// End Mehtod 
+
+    public function ActiveSupplierApprove(Request $request){
+
+        $supplier_id = $request->id;
+        $user = User::findOrFail($supplier_id)->update([
+            'status' => 'active',
+        ]);
+
+        $notification = array(
+            'message' => 'Supplier Active Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('active.supplier')->with($notification);
+
+    }// End Mehtod 
+
+    public function ActiveSupplierDetails($id){
+
+        $activeSupplierDetails = User::findOrFail($id);
+        return view('backend.supplier.active_supplier_details',compact('activeSupplierDetails'));
+
+    }// End Mehtod 
+
+    public function InActiveSupplierApprove(Request $request){
+
+        $supplier_id = $request->id;
+        $user = User::findOrFail($supplier_id)->update([
+            'status' => 'inactive',
+        ]);
+
+        $notification = array(
+            'message' => 'Supplier InActive Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('inactive.supplier')->with($notification);
+
+    }// End Mehtod 
+
 
 }

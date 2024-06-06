@@ -20,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone',
+        'supplier_join',
         'address',
         'role',
         'status',
@@ -55,4 +56,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role === 'customer';
     }
+
 }

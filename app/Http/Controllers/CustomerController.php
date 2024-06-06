@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -47,20 +48,21 @@ class CustomerController extends Controller
 
     } // End Mehtod
 
-    public function CustomerLogout(Request $request){
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        $notification = array(
-            'message' => 'Logout Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect('/login')->with($notification);
-    } // End Mehtod 
+        public function CustomerLogout(Request $request)
+        {
+            // Invalidate the session
+            $request->session()->invalidate();
+    
+            // Regenerate CSRF token
+            $request->session()->regenerateToken();
+    
+            // Clear the authentication guard
+            Auth::guard('web')->logout();
+    
+            // Redirect to the login page
+            return redirect('/login')->with('status', 'Successfully logged out!');
+            exit;
+        }// End Mehtod 
 
     public function CustomerUpdatePassword(Request $request){
         // Validation 

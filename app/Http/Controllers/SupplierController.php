@@ -134,7 +134,10 @@ class SupplierController extends Controller
 
     Auth::login($user); // Logs in the user
 
-    return redirect()->route('verification.notice')->with($notification);
+    return redirect()->route('verification.notice')->with('dashboard', 'supplier')->with($notification);
+
+    
 }
+
 }
 

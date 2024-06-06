@@ -40,6 +40,16 @@
         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
     </li>
     <li class="nav-item">
+        <!-- Logout Form -->
+<!-- <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+    @csrf
+</form> -->
+
+<!-- Logout Link -->
+<!-- <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Logout
+</a> -->
+
     <a class="nav-link" href="{{ route('customer.logout') }}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
     </li>
 </ul>

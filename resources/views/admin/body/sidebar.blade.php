@@ -19,7 +19,7 @@
 					</a>
 				</li>
 
-				<li>
+				<!-- <li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-home-circle'></i>
 						</div>
@@ -37,7 +37,7 @@
 						<li> <a href="dashboard-human-resources.html"><i class="bx bx-right-arrow-alt"></i>Human Resources</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
@@ -49,7 +49,7 @@
 						</li>
 						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
 						</li>
-						<li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
+						<!-- <li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
 						</li>
 						<li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>
 						</li>
@@ -58,29 +58,46 @@
 						<li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
 						</li>
 						<li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 				<li class="menu-label">UI Elements</li>
 				
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-cart'></i>
+						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">eCommerce</div>
+						<div class="menu-title">Supplier</div>
 					</a>
 					<ul>
-						<li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Products</a>
+					
+					<li> <a href="{{ route('inactive.supplier') }}"><i class="bx bx-right-arrow-alt"></i>Inactive Supplier</a>
+					<li> <a href="{{ route('active.supplier') }}"><i class="bx bx-right-arrow-alt"></i>Active Supplier</a>
 						</li>
-						<li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
-						</li>
-						<li> <a href="ecommerce-add-new-products.html"><i class="bx bx-right-arrow-alt"></i>Add New Products</a>
-						</li>
-						<li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Orders</a>
-						</li>
+
 					</ul>
 				</li>
+
+
+
 				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class="bx bx-category"></i>
+						</div>
+						<div class="menu-title">User Manage</div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('all-customer') }}"><i class="bx bx-right-arrow-alt"></i>All Customer</a>
+						</li>
+
+							<li> <a href="{{ route('all-supplier') }}"><i class="bx bx-right-arrow-alt"></i>All Supplier</a>
+						</li>
+
+
+					</ul>
+				</li>
+
+				<!-- <li>
 					<a class="has-arrow" href="javascript:;">
 						<div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
 						</div>
@@ -127,6 +144,10 @@
 					<a class="has-arrow" href="javascript:;">
 						<div class="parent-icon"><i class="bx bx-repeat"></i>
 						</div>
+
+
+
+
 						<div class="menu-title">Content</div>
 					</a>
 					<ul>
@@ -142,6 +163,9 @@
 					<a class="has-arrow" href="javascript:;">
 						<div class="parent-icon"> <i class="bx bx-donate-blood"></i>
 						</div>
+
+
+
 						<div class="menu-title">Icons</div>
 					</a>
 					<ul>
@@ -184,6 +208,6 @@
 						<div class="menu-title">Support</div>
 					</a>
 				</li>
-			</ul>
+			</ul> -->
 			<!--end navigation-->
 		</div>
