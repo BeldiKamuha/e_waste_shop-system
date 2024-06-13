@@ -56,10 +56,12 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
     Route::post('/supplier/update/password', [SupplierController::class, 'SupplierUpdatePassword'])->name('supplier.update.password');
 
 
-    // Vendor Add Product All Route
-    Route::controller(SupplierProductController::class)->group(function(){
+    // Supplier Add Product All Route
+
+        Route::controller(SupplierProductController::class)->group(function(){
         Route::get('/supplier/all/product' , 'SupplierAllProduct')->name('supplier.all.product');
         Route::get('/supplier/add/product' , 'SupplierAddProduct')->name('supplier.add.product');
+        Route::post('/supplier/store/product' , 'SupplierStoreProduct')->name('supplier.store.product');
     
     });
 

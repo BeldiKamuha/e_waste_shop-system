@@ -2,6 +2,9 @@
 @section('supplier')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
 <div class="page-content">
 
 				<!--breadcrumb-->
@@ -25,7 +28,7 @@
 	  <h5 class="card-title">Add New Product</h5>
 	  <hr/>
 
-<form id="myForm" method="post" action="{{ route('store.product') }}" enctype="multipart/form-data" >
+      <form id="myForm" method="post" action="{{ route('supplier.store.product') }}" enctype="multipart/form-data" >
 			@csrf
 
        <div class="form-body mt-4">
@@ -61,10 +64,10 @@
 				<textarea name="short_descp" class="form-control" id="inputProductDescription" rows="3"></textarea>
 			  </div>
 
-			   <div class="mb-3">
+			   <!-- <div class="mb-3">
 				<label for="inputProductDescription" class="form-label">Long Description</label>
 				<textarea id="mytextarea" name="long_descp">Hello, World!</textarea>
-			  </div>
+			  </div> -->
 
 
 
@@ -113,31 +116,35 @@
 
 				  <div class="form-group col-12">
 					<label for="inputProductType" class="form-label">Product Brand</label>
-					<select name="brand_id" class="form-select" id="inputProductType">
+					<select name="brand" class="form-select" id="inputProductType">
 						<option></option>
-						@foreach($brands as $brand)
-						<option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-						 @endforeach
+					
+                        <option value="Apple">Apple</option>
+						<option value="Hp">Hp</option>
+						
 					  </select>
 				  </div>
 
 				  <div class="form-group col-12">
-					<label for="inputSupplier" class="form-label">Product Category</label>
-					<select name="category_id" class="form-select" id="inputSupplier">
+					<label for="inputVendor" class="form-label">Product Category</label>
+					<select name="category" class="form-select" id="inputVendor">
 						<option></option>
-						@foreach($categories as $cat)
-						<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-						 @endforeach
+						
+						<option value="Phone">Phone</option>
+						<option value="Laptop">Laptop</option>
+					
 					  </select>
 				  </div>
 
-				  <div class="form-group col-12">
+				  <!-- <div class="form-group col-12">
 					<label for="inputCollection" class="form-label">Product SubCategory</label>
 					<select name="subcategory_id" class="form-select" id="inputCollection">
 						<option></option>
 						 
 					  </select>
-				  </div>
+				  </div> -->
+
+
 				 
 
 
@@ -329,7 +336,7 @@
 
  
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
   		
   		$(document).ready(function(){
   			$('select[name="category_id"]').on('change', function(){
@@ -354,7 +361,7 @@
   			});
   		});
 
-  </script>
+  </script> -->
 
 
 @endsection

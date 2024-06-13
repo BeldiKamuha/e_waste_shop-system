@@ -7,11 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
 	<link rel="icon" href="{{ asset('adminbackend/assets/images/favicon-32x32.png')}}" type="image/png" />
+
+	<link href="{{ asset('adminbackend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+
 	<!--plugins-->
 	<link href="{{ asset('adminbackend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
 	<link href="{{ asset('adminbackend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 	<link href="{{ asset('adminbackend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 	<link href="{{ asset('adminbackend/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+
 	<!-- loader-->
 	<link href="{{ asset('adminbackend/assets/css/pace.min.css')}}" rel="stylesheet" />
 	<script src="{{ asset('adminbackend/assets/js/pace.min.js')}}"></script>
@@ -23,6 +27,10 @@
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/header-colors.css')}}" />
+
+	<!-- DataTable -->
+	<link href="{{ asset('adminbackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+<!-- DataTable-->
 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
@@ -157,7 +165,7 @@
 	<!--end switcher-->
     
 	<!-- Bootstrap JS -->
-	<script src="{{ asset('adminbackend/assets/js/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{ asset('adminbackend/assets/js/bootstrap.bundle.min.js') }}"></script>
 	<!--plugins-->
 	<script src="{{ asset('adminbackend/assets/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('adminbackend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
@@ -176,6 +184,16 @@
 		  });
 	  </script>
 	  <script src="{{ asset('adminbackend/assets/js/index.js') }}"></script>
+
+	  <!--Datatable-->
+<script src="{{ asset('adminbackend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+	</script>
+<!--Datatable-->
+
 	<!--app JS-->
 	<script src="{{ asset('adminbackend/assets/js/app.js') }}"></script>
 
@@ -203,6 +221,20 @@
  }
  @endif 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ <script src="{{ asset('adminbackend/assets/js/code.js') }}"></script>
+
+ <script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+
+ 	<script src='https://cdn.tiny.cloud/1/geebhescz1xrp1ctaf99bdufj6qkambl7v1q3c134rinhurh/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+	</script>
+
+	<script>
+		tinymce.init({
+		  selector: '#mytextarea'
+		});
+	</script>
 
 </body>
 
