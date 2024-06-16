@@ -104,7 +104,13 @@ Route::controller(ActiveUserController::class)->group(function(){
 
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
-Route::put('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+
+// Password Reset Routes
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    ->name('password.reset');
+
+Route::put('reset-password', [NewPasswordController::class, 'store'])
+    ->name('password.update');
 
 
 Route::get('/become/supplier', [SupplierController::class, 'BecomeSupplier'])->name('become.supplier');

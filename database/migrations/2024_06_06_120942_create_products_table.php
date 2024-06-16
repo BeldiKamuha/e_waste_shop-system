@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text('short_descp');
             $table->text('long_descp')->nullable();
             $table->string('product_thambnail');
-            $table->string('vendor_id')->nullable();
+            $table->string('supplier_id')->nullable();
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();
             $table->integer('special_offer')->nullable();

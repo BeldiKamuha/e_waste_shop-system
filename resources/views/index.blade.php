@@ -1,6 +1,7 @@
 @extends('dashboard') 
 @section('customer')
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
   <div class="page-header breadcrumb-wrap">
@@ -218,7 +219,7 @@
         <input required="" class="form-control" name="address" type="text" value="{{ $customerData->address }}" />
     </div>
     <div class="form-group col-md-12">
-        <label>User Photo <span class="required">*</span></label>
+        <label>Customer Photo <span class="required">*</span></label>
         <input class="form-control" name="photo" type="file"  id="image" />
     </div>
 
@@ -237,6 +238,8 @@
         </div>
     </div>
                                     </div>
+                                    
+                                    
 
 <!-- /// Change Password  -->
 
@@ -320,8 +323,6 @@
             reader.readAsDataURL(e.target.files['0']);
         });
     });
-
-
 </script>
 
 
