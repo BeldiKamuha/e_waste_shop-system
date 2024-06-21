@@ -108,13 +108,12 @@
                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                 </div>
                 <div>
-                    @if($product->supplier_id == NULL)
+
+                @if($product->supplier_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html"></a></span>
-
+  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['supplier']['name'] }}</a></span>
                     @endif
-
 
 
                 </div>
