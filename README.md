@@ -84,6 +84,63 @@ npm run build
 php artisan migrate
 ```
 
+## Project Structure
+.
+├── README.md
+├── app
+│   ├── Actions
+│   ├── Console
+│   ├── Events
+│   ├── Exceptions
+│   ├── Http
+│   ├── Models
+│   ├── Providers
+│   └── View
+├── artisan
+├── bootstrap
+│   ├── app.php
+│   └── cache
+├── composer.json
+├── composer.lock
+├── config
+│   ├── app.php
+│   ├── auth.php
+│   ├── broadcasting.php
+│   ├── cache.php
+│   ├── cors.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── fortify.php
+│   ├── hashing.php
+│   ├── jetstream.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── sanctum.php
+│   ├── services.php
+│   ├── session.php
+│   └── view.php
+├── database
+│   ├── factories
+│   ├── migrations
+│   └── seeders
+├── lang
+├── node_modules
+├── package-lock.json
+├── package.json
+├── phpunit.xml
+├── postcss.config.js
+├── public
+├── reset_password.sh
+├── reset_password.sh.save
+├── resources
+├── routes
+├── storage
+├── tailwind.config.js
+├── tests
+├── vendor
+└── vite.config.js
+
 ## License
 E-WasteHub is completely free and released under the [MIT license](https://opensource.org/licenses/MIT).
 
