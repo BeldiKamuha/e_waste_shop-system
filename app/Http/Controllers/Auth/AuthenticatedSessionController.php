@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,16 +30,24 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $url='';
-        if($request->user()->role==='admin'){
+        $notification = array(
+            'message' => 'Login Successfully',
+            'alert-type' => 'success'
+        );
+
+        \Log::info('User role: ' . $request->user()->role); // Add this line for debugging
+
+        $url = '';
+        if ($request->user()->role === 'admin') {
             $url = 'admin/dashboard';
-        } elseif($request->user()->role==='supplier'){
+        } else if ($request->user()->role === 'supplier') {
             $url = 'supplier/dashboard';
-        }elseif($request->user()->role==='customer'){
+        } else if ($request->user()->role === 'customer') {
             $url = '/dashboard';
         }
 
-        return redirect()->intended($url);
+        return redirect()->intended($url)->with($notification);
+    
     }
 
     /**
