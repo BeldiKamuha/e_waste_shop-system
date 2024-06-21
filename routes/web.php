@@ -26,8 +26,9 @@ use App\Http\Controllers\Backend\SupplierProductController;
 
  // Prevent Back Middleware
 
-// Route::group(['middleware' => 'prevent-back-history'], function() {
+Route::group(['middleware' => 'prevent-back-history'], function() {
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
 /// Customer Dashboard
 
@@ -47,7 +48,6 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
 /// Supplier Dashboard
 
     Route::middleware(['auth', 'verified', 'role:supplier'])->group(function() {
-    Route::get('/supplier/login', [SupplierController::class, 'SupplierLogin'])->name('supplier.login');
     Route::get('/supplier/dashboard', [SupplierController::class, 'SupplierDashboard'])->name('supplier.dashboard');
     Route::get('/supplier/logout', [SupplierController::class, 'SupplierDestroy'])->name('supplier.logout');
     Route::get('/supplier/profile', [SupplierController::class, 'SupplierProfile'])->name('supplier.profile');
@@ -62,6 +62,14 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
         Route::get('/supplier/all/product' , 'SupplierAllProduct')->name('supplier.all.product');
         Route::get('/supplier/add/product' , 'SupplierAddProduct')->name('supplier.add.product');
         Route::post('/supplier/store/product' , 'SupplierStoreProduct')->name('supplier.store.product');
+        Route::get('/supplier/edit/product/{id}' , 'SupplierEditProduct')->name('supplier.edit.product');
+        Route::post('/supplier/update/product' , 'SupplierUpdateProduct')->name('supplier.update.product');
+        Route::post('/supplier/update/product/thambnail' , 'SupplierUpdateProductThabnail')->name('supplier.update.product.thambnail');
+        Route::post('/supplier/update/product/multiimage' , 'SupplierUpdateProductmultiImage')->name('supplier.update.product.multiimage');
+        Route::get('/supplier/product/multiimg/delete/{id}' , 'SupplierMultiimgDelete')->name('supplier.product.multiimg.delete');
+        Route::get('/supplier/product/inactive/{id}' , 'SupplierProductInactive')->name('supplier.product.inactive');
+        Route::get('/supplier/product/active/{id}' , 'SupplierProductActive')->name('supplier.product.active');
+        Route::get('/supplier/delete/product/{id}' , 'SupplierProductDelete')->name('supplier.delete.product');
     
     });
 
@@ -103,7 +111,7 @@ Route::controller(ActiveUserController::class)->group(function(){
 });
 
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
 
 // Password Reset Routes
 Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
@@ -134,7 +142,7 @@ Route::middleware(['auth', 'signed'])->group(function () {
 });
 
 
-// });
+});
 
 // Load authentication routes
 require __DIR__.'/auth.php';
