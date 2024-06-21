@@ -9,8 +9,8 @@ This project, E-WasteHub, develops an online platform for inventory management i
 
 For the following system, it requires the following technologies:
 - Laravel framework
-- PHP 8.2
-- composer
+- PHP (8.2 or higher)
+- Composer
 - Apache server or XAMPP
 - Preferred IDE
 - Jetstream
@@ -83,11 +83,26 @@ npm install
 npm run build
 php artisan migrate
 ```
+## Usage
+1. Clone the repo and cd into it
+2. In your terminal `composer install`
+3. Rename or copy `.env.example` file to `.env`
+4. `php artisan key:generate`
+5. Set your database credentials in your .env file 
+6. Import db file(database/e_waste_shop.sql) into your database (mysql,sql)
+7. `npm install`
+8. `npm run watch`
+9. Edit .env file :- remove APP_URL
+10. `php artisan serve` or use virtual host
+11. Visit `localhost:8000` in your browser
+12. Visit /admin if you want to access the admin panel. Admin Email/Password: `admin@gmail.com`/`12345678`. User Email/Password: `user@gmail.com`/`12345678`
+
 
 ## Project Structure
-.
-├── README.md
-├── app
+
+```
+├── README.md                           
+├── app                                  
 │   ├── Actions
 │   ├── Console
 │   ├── Events
@@ -140,11 +155,10 @@ php artisan migrate
 ├── tests
 ├── vendor
 └── vite.config.js
+```
 
 ## License
 E-WasteHub is completely free and released under the [MIT license](https://opensource.org/licenses/MIT).
-
-
 
 
 
