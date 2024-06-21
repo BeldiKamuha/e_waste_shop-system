@@ -55,7 +55,7 @@ $suppliers = App\Models\User::where('status','active')->where('role','supplier')
                                     <li><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $supplier->phone }}</span></li>
                                     </ul>
                                 </div>
-            <a href="{{ route('supplier.details',$supplier->id) }}l" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+            <a href="{{ route('supplier.details',$supplier->id) }}" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>

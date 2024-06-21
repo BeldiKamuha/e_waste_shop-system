@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function SupplierDetails($id)
-    {
-        $supplier = User::findOrFail($id); 
-        $sproduct = Product::where('supplier_id', $id)->get(); 
-        return view('frontend.supplier.supplier_details', compact('supplier', 'sproduct'));
-    }
+    public function SupplierDetails($id){
+
+        $supplier = User::findOrFail($id);
+        $sproduct = Product::where('supplier_id',$id)->get();
+        return view('frontend.supplier.supplier_details',compact('supplier','sproduct'));
+
+     } // End Method
+
 }
