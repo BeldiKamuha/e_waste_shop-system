@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
+use App\Http\Controllers\Frontend\IndexController;
 
 
 
@@ -111,8 +112,6 @@ Route::controller(ActiveUserController::class)->group(function(){
 });
 
 
-
-
 // Password Reset Routes
 Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
     ->name('password.reset');
@@ -142,12 +141,18 @@ Route::middleware(['auth', 'signed'])->group(function () {
 });
 
 
+
 });
+
+
 
 // Load authentication routes
 require __DIR__.'/auth.php';
 
 
+
+/// Frontend Product Details All Route 
+Route::get('/supplier/details/{id}', [IndexController::class, 'SupplierDetails'])->name('supplier.details');
 
 
 
@@ -171,3 +176,7 @@ require __DIR__.'/auth.php';
 // Route::get('/supplier/login', [SupplierController::class, 'SupplierLogin'])->name('supplier.login');
 
 // require __DIR__.'/auth.php';
+
+
+
+
