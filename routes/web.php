@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\CartController;
 
 
 
@@ -42,6 +43,15 @@ Route::get('/dashboard', [CustomerController::class, 'CustomerDashboard'])->name
 Route::post('/customer/profile/store', [CustomerController::class, 'CustomerProfileStore'])->name('customer.profile.store');
 Route::get('/customer/logout', [CustomerController::class, 'CustomerLogout'])->name('customer.logout');
 Route::post('/customer/update/password', [CustomerController::class, 'CustomerUpdatePassword'])->name('customer.update.password');
+
+// Cart All Route 
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart', 'MyCart')->name('mycart');
+    Route::get('/get-cart-product', 'GetCartProduct');
+    Route::get('/cart-remove/{rowId}', 'RemoveCartProduct');
+    Route::post('/cart-update-quantity', 'UpdateCartQuantity');
+});
+
 
 }); 
 
@@ -153,8 +163,15 @@ require __DIR__.'/auth.php';
 
 /// Frontend Product Details All Route 
 Route::get('/supplier/details/{id}', [IndexController::class, 'SupplierDetails'])->name('supplier.details');
+Route::get('/supplier/all', [IndexController::class, 'SupplierAll'])->name('supplier.all');
 
+/// Add to cart store data
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
+// Get Data from mini Cart
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
+
+Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 
 
 

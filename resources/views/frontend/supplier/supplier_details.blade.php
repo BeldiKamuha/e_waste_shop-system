@@ -121,22 +121,31 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>Ksh {{ $product->selling_price }}</span>
 
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>Ksh {{ $product->discount_price }}</span>
+                        <span class="old-price">Ksh {{ $product->selling_price }}</span>
                     </div>
                     @endif
 
 
 
                     <div class="add-cart">
-                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                    </div>
+    <form action="{{ url('/cart/data/store/'.$product->id) }}" method="POST" class="add-to-cart-form">
+        @csrf
+        <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="color" value="{{ $product->color }}">
+        <input type="hidden" name="size" value="{{ $product->size }}">
+        <input type="hidden" name="quantity" value="1"> <!-- Default quantity -->
+        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add</button>
+    </form>
+</div>
+
                 </div>
             </div>
         </div>

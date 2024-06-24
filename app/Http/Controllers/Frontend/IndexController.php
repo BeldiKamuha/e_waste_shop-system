@@ -15,5 +15,14 @@ class IndexController extends Controller
         $sproduct = Product::where('supplier_id', $id)->get();
 
         return view('frontend.supplier.supplier_details', compact('supplier', 'sproduct'));
-    }
+    } // End Method 
+
+
+    public function SupplierAll(){
+
+       $suppliers = User::where('status','active')->where('role','supplier')->orderBy('id','DESC')->get();
+       return view('frontend.supplier.supplier_all',compact('suppliers'));
+
+    } // End Method
+
 }
