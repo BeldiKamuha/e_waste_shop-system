@@ -236,6 +236,51 @@
 		});
 	</script>
 
+	<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    // Delete Confirmation
+    $(document).on('click', '.delete-confirm', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('supplier.delete.product', '') }}/" + id;
+            }
+        });
+    });
+
+    // Status Change Confirmation
+    $(document).on('click', '.status-confirm', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var status = $(this).data('status');
+        var action = status === 'inactive' ? 'Inactivate' : 'Activate';
+        var route = status === 'inactive' ? "{{ route('supplier.product.inactive', '') }}/" : "{{ route('supplier.product.active', '') }}/";
+        Swal.fire({
+            title: `Are you sure you want to ${action} this product?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `Yes, ${action.toLowerCase()} it!`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = route + id;
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

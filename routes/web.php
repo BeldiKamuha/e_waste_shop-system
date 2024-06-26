@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\CheckoutController;
 
 
 
@@ -52,8 +53,11 @@ Route::controller(CartController::class)->group(function(){
     Route::post('/cart-update-quantity', 'UpdateCartQuantity');
 });
 
+   //  Route for CheckoutStore
+   Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
 }); 
+
 
 
 /// Supplier Dashboard
@@ -172,7 +176,8 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
 
 Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
-
+// Checkout Page Route 
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 
 
 

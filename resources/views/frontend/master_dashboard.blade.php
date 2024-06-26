@@ -1,8 +1,5 @@
-
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8" />
     <title>E-Waste Shop </title>
@@ -15,35 +12,22 @@
     <meta property="og:image" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Favicon -->  
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets/imgs/theme/favicon.svg') }}" />
-    <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 </head>
 
 <body>
-    <!-- Modal -->
- 
-    <!-- Quick view -->
-  @include('frontend.body.quickview')
-    <!-- Header  -->
-
-  @include('frontend.body.header')
-    <!--End header--> 
-
-
-
+    @include('frontend.body.quickview')
+    @include('frontend.body.header')
+    
     <main class="main">
         @yield('main')
-
     </main>
 
-  @include('frontend.body.footer')
+    @include('frontend.body.footer')
 
-
-   
-    <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
@@ -53,7 +37,7 @@
             </div>
         </div>
     </div>
-    <!-- Vendor JS-->
+    
     <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
@@ -73,92 +57,123 @@
     <script src="{{ asset('frontend/assets/js/plugins/jquery.vticker-min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/plugins/jquery.theia.sticky.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/plugins/jquery.elevatezoom.js') }}"></script>
-    <!-- Template  JS -->
     <script src="{{ asset('frontend/assets/js/main.js?v=5.3') }}"></script>
     <script src="{{ asset('frontend/assets/js/shop.js?v=5.3') }}"></script>
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script type="text/javascript">
-  $(document).ready(function() {
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type','info') }}"
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+    </script>
 
-// Setup CSRF token for all Ajax requests
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+<script type="text/javascript">
+$(document).ready(function() {
 
-// Function to update mini cart
-function updateMiniCart() {
-    $.ajax({
-        type: 'GET',
-        url: '/product/mini/cart', // Replace with your actual route for fetching mini cart data
-        dataType: 'json',
-        success: function(response) {
-            var miniCartHtml = '';
-            var total = 0;
-
-            $.each(response.carts, function(key, value) {
-                miniCartHtml += `
-                    <ul>
-                        <li>
-                            <div class="shopping-cart-img">
-                                <a href="shop-product-right.html"><img alt="${value.name}" src="${value.options.image}" style="width:50px;height:50px;" /></a>
-                            </div>
-                            <div class="shopping-cart-title" style="margin-left: 10px;">
-                                <h4><a href="shop-product-right.html">${value.name}</a></h4>
-                                <h4><span>${value.qty} × </span>${value.price}</h4>
-                            </div>
-                            <div class="shopping-cart-delete">
-                                <a href="javascript:void(0);" id="${value.rowId}" class="miniCartRemove"><i class="fi-rs-cross-small"></i></a>
-                            </div>
-                        </li>
-                    </ul>
-                    <hr><br>`;
-                total += parseFloat(value.price) * parseInt(value.qty);
-            });
-
-            // Update mini cart HTML
-            $('#miniCart').html(miniCartHtml);
-
-            // Update total price
-            $('.shopping-cart-total span').text('$' + total.toFixed(2));
-            
-            // Update mini cart count
-            $('.pro-count').text(response.cartQty);
-
-            // Attach event listeners to the remove buttons
-            $('.miniCartRemove').on('click', function() {
-                var rowId = $(this).attr('id');
-                miniCartRemove(rowId);
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Error fetching mini cart content:', error);
+    // Setup CSRF token for all Ajax requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-}
 
-// Function to remove item from mini cart
-function miniCartRemove(rowId) {
-    $.ajax({
-        type: 'GET',
-        url: '/minicart/product/remove/' + rowId,
-        dataType: 'json',
-        success: function(data) {
-            if (data.success) {
-                // Update mini cart after successful removal
-                updateMiniCart();
+    // Function to update mini cart
+    function updateMiniCart() {
+        $.ajax({
+            type: 'GET',
+            url: '/product/mini/cart', // Replace with your actual route for fetching mini cart data
+            dataType: 'json',
+            success: function(response) {
+                var miniCartHtml = '';
+                var total = 0;
 
-                // Show success message
-                Swal.fire({
-                    icon: 'success',
-                    title: data.success,
-                    showConfirmButton: false,
-                    timer: 3000
+                $.each(response.carts, function(key, value) {
+                    miniCartHtml += `
+                        <ul>
+                            <li>
+                                <div class="shopping-cart-img">
+                                    <a href="shop-product-right.html"><img alt="${value.name}" src="${value.options.image}" style="width:50px;height:50px;" /></a>
+                                </div>
+                                <div class="shopping-cart-title" style="margin-left: 10px;">
+                                    <h4><a href="shop-product-right.html">${value.name}</a></h4>
+                                    <h4><span>${value.qty} × </span>${value.price}</h4>
+                                </div>
+                                <div class="shopping-cart-delete">
+                                    <a href="javascript:void(0);" id="${value.rowId}" class="miniCartRemove"><i class="fi-rs-cross-small"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr><br>`;
+                    total += parseFloat(value.price) * parseInt(value.qty);
                 });
-            } else {
+
+                // Update mini cart HTML
+                $('#miniCart').html(miniCartHtml);
+
+                // Update total price
+                $('.shopping-cart-total span').text('$' + total.toFixed(2));
+                
+                // Update mini cart count
+                $('.pro-count').text(response.cartQty);
+
+                // Attach event listeners to the remove buttons
+                $('.miniCartRemove').on('click', function() {
+                    var rowId = $(this).attr('id');
+                    miniCartRemove(rowId);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching mini cart content:', error);
+            }
+        });
+    }
+
+    // Function to remove item from mini cart
+    function miniCartRemove(rowId) {
+        $.ajax({
+            type: 'GET',
+            url: '/minicart/product/remove/' + rowId,
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    // Update mini cart after successful removal
+                    updateMiniCart();
+
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.success,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error removing product from cart',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error removing product from cart:', error);
+
+                // Show error message
                 Swal.fire({
                     icon: 'error',
                     title: 'Error removing product from cart',
@@ -166,46 +181,44 @@ function miniCartRemove(rowId) {
                     timer: 3000
                 });
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error removing product from cart:', error);
+        });
+    }
 
-            // Show error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Error removing product from cart',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        }
-    });
-}
+    // Add to cart form submission
+    $(document).on('submit', '.add-to-cart-form', function(event) {
+        event.preventDefault();
 
-// Add to cart form submission
-$(document).on('submit', '.add-to-cart-form', function(event) {
-    event.preventDefault();
+        var form = $(this);
+        var actionUrl = form.attr('action');
 
-    var form = $(this);
-    var actionUrl = form.attr('action');
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(),
+            success: function(response) {
+                if (response.success) {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product added to cart successfully',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
 
-    $.ajax({
-        type: "POST",
-        url: actionUrl,
-        data: form.serialize(),
-        success: function(response) {
-            if (response.success) {
-                // Show success message
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product added to cart successfully',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-
-                // Update mini cart after successful addition
-                updateMiniCart();
-            } else {
-                // Show error message
+                    // Update mini cart after successful addition
+                    updateMiniCart();
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error adding product to cart',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error adding product to cart:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error adding product to cart',
@@ -213,35 +226,22 @@ $(document).on('submit', '.add-to-cart-form', function(event) {
                     timer: 3000
                 });
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error adding product to cart:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error adding product to cart',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        }
+        });
     });
-});
 
-// Initial call to update mini cart on page load
-updateMiniCart();
-
+    // Initial call to update mini cart on page load
+    updateMiniCart();
 });
 </script>
 
-
 <!-- // Start Load My Cart // -->
-
 <script type="text/javascript">
 $(document).ready(function() {
     // Function to update the cart
     function updateCart() {
         $.ajax({
             type: 'GET',
-            url: 'get-cart-product', // Replace with your actual route for fetching cart data
+            url: '/get-cart-product',
             dataType: 'json',
             success: function(response) {
                 console.log(response); // Log response to debug
@@ -260,7 +260,7 @@ $(document).ready(function() {
                                     <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name}</a></h6>
                                 </td>
                                 <td class="price" data-title="Price">
-                                    <h4 class="text-body">$${value.price}</h4>
+                                    <h4 class="text-body">Ksh ${value.price}</h4>
                                 </td>
                                 <td class="price" data-title="Color">
                                     ${value.options.color == null ? `<span>....</span>` : `<h6 class="text-body">${value.options.color}</h6>`}
@@ -278,7 +278,7 @@ $(document).ready(function() {
                                     </div>
                                 </td>
                                 <td class="price" data-title="Subtotal">
-                                    <h4 class="text-brand">$${value.subtotal}</h4>
+                                    <h4 class="text-brand">Ksh ${value.subtotal}</h4>
                                 </td>
                                 <td class="action text-center" data-title="Remove"><a href="#" class="text-body cartRemove" id="${value.rowId}"><i class="fi-rs-trash"></i></a></td>
                             </tr> `;
@@ -294,6 +294,10 @@ $(document).ready(function() {
 
                 // Update cart count
                 $('.pro-count').text(response.cartQty);
+
+                // Update subtotal and grand total in the cart summary
+                $('.cart_total_label .text-brand').text('KSH ' + total.toFixed(2));
+                $('.cart_total_amount .text-brand').text('KSH ' + total.toFixed(2));
 
                 // Attach event listeners to the remove buttons
                 $('.cartRemove').on('click', function() {

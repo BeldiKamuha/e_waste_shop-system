@@ -201,6 +201,36 @@
  @endif 
 </script>
 
+ <!-- Include SweetAlert2 JS -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('click', function(e) {
+                const target = e.target;
+                if (target.classList.contains('confirm-action')) {
+                    e.preventDefault();
+                    const action = target.dataset.action;
+                    const actionText = action === 'inactivate' ? 'inactivate' : 'activate';
+                    const confirmText = action === 'inactivate' ? 'Yes, inactivate!' : 'Yes, activate!';
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: `You are about to ${actionText} this supplier!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: confirmText
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

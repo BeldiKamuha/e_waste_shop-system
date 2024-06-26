@@ -135,15 +135,16 @@
 
 
                     <div class="add-cart">
-    <form action="{{ url('/cart/data/store/'.$product->id) }}" method="POST" class="add-to-cart-form">
-        @csrf
-        <input type="hidden" name="product_name" value="{{ $product->product_name }}">
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <input type="hidden" name="color" value="{{ $product->color }}">
-        <input type="hidden" name="size" value="{{ $product->size }}">
-        <input type="hidden" name="quantity" value="1"> <!-- Default quantity -->
-        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add</button>
-    </form>
+<form action="{{ url('/cart/data/store/'.$product->id) }}" method="POST" class="add-to-cart-form">
+    @csrf
+    <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+    <input type="hidden" name="product_id" value="{{ $product->id }}">
+    <input type="hidden" name="color" value="{{ $product->color }}">
+    <input type="hidden" name="size" value="{{ $product->size }}">
+    <input type="hidden" name="quantity" value="1"> <!-- Default quantity -->
+    <input type="hidden" name="supplier_id" value="{{ $product->supplier_id }}"> <!-- Supplier ID -->
+    <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add</button>
+</form>
 </div>
 
                 </div>

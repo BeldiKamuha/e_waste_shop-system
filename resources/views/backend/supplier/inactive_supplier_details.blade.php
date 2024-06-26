@@ -114,12 +114,10 @@
 			</div>
  
   
-
-
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9 text-secondary">
-					<input type="submit" class="btn btn-danger px-4" value="Active Supplier" />
+				<button type="submit" class="btn btn-danger px-4 confirm-action" data-action="activate">Active Supplier</button>
 				</div>
 			</div>
 		</div>
