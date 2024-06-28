@@ -2,16 +2,21 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\NewPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
+use App\Http\Controllers\Backend\SupplierOrderController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\AllCustomerController;
+
+
 
 
 
@@ -45,8 +50,8 @@ Route::post('/customer/profile/store', [CustomerController::class, 'CustomerProf
 Route::get('/customer/logout', [CustomerController::class, 'CustomerLogout'])->name('customer.logout');
 Route::post('/customer/update/password', [CustomerController::class, 'CustomerUpdatePassword'])->name('customer.update.password');
 
-// Cart All Route 
-Route::controller(CartController::class)->group(function(){
+    // Cart All Route 
+    Route::controller(CartController::class)->group(function(){
     Route::get('/mycart', 'MyCart')->name('mycart');
     Route::get('/get-cart-product', 'GetCartProduct');
     Route::get('/cart-remove/{rowId}', 'RemoveCartProduct');
@@ -56,7 +61,21 @@ Route::controller(CartController::class)->group(function(){
    //  Route for CheckoutStore
    Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
+    // Stripe All Route 
+    Route::controller(StripeController::class)->group(function(){
+    Route::post('/cash/order' , 'CashOrder')->name('cash.order');
+
 }); 
+
+// Customer Dashboard All Route 
+    Route::controller(AllCustomerController::class)->group(function(){
+    Route::get('/customer/account/page' , 'CustomerAccount')->name('customer.account.page');
+    Route::get('/customer/change/password' , 'CustomerChangePassword')->name('customer.change.password');
+    Route::get('/customer/order/page' , 'CustomerOrderPage')->name('customer.order.page');
+
+});  
+
+});  // end Supplier Group middleware
 
 
 
@@ -88,7 +107,16 @@ Route::controller(CartController::class)->group(function(){
     
     });
 
+
+ // Brand All Route 
+Route::controller(SupplierOrderController::class)->group(function(){
+    Route::get('/supplier/order' , 'SupplierOrder')->name('supplier.order');
+
+
 });
+
+
+}); // end Supplier Group middleware
 
 
 /// Admin Dashboard

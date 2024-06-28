@@ -51,10 +51,7 @@
 						<div class="menu-title">All Order</div>
 					</a>
 					<ul>
-						<li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
-						</li>
-						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
-						</li>
+					<li> <a href="{{ route('supplier.order') }}"><i class="bx bx-right-arrow-alt"></i>Supplier Order</a>
 						
 						</li>
 					</ul>
