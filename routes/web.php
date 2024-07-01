@@ -72,6 +72,8 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
     Route::get('/customer/account/page' , 'CustomerAccount')->name('customer.account.page');
     Route::get('/customer/change/password' , 'CustomerChangePassword')->name('customer.change.password');
     Route::get('/customer/order/page' , 'CustomerOrderPage')->name('customer.order.page');
+    Route::get('/customer/order_details/{order_id}' , 'CustomerOrderDetails');
+    Route::get('/customer/invoice_download/{order_id}' , 'CustomerOrderInvoice');
 
 });  
 
