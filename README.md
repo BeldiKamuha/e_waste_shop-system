@@ -14,6 +14,7 @@ For the following system, it requires the following technologies:
 - Apache server or XAMPP
 - Preferred IDE
 - Jetstream
+- DOMPDF Wrapper for Laravel
 
 ## Installation
 In order to install PHP click [here](https://www.php.net/downloads) and as for [composer](https://getcomposer.org) click on the link.
@@ -83,6 +84,24 @@ npm install
 npm run build
 php artisan migrate
 ```
+### Install DOMPDF Wrapper for Laravel
+Require this package in your composer.json and update composer. This will download the package and the dompdf + fontlib libraries also.
+```
+composer require barryvdh/laravel-dompdf
+```
+#### Using
+You can create a new DOMPDF instance and load a HTML string, file or view name. You can save it to a file, or stream (show in browser) or download.
+```
+    use Barryvdh\DomPDF\Facade\Pdf;
+    $pdf = Pdf::loadView('frontend.order.order_invoice', compact('order','orderItem'))->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+    ]);
+    return $pdf->download('invoice.pdf');
+```
+
+
+
 ## Usage
 1. Clone the repo and cd into it
 2. In your terminal `composer install`
@@ -101,60 +120,58 @@ php artisan migrate
 ## Project Structure
 
 ```
-├── README.md                           
-├── app                                  
-│   ├── Actions
-│   ├── Console
-│   ├── Events
-│   ├── Exceptions
-│   ├── Http
-│   ├── Models
-│   ├── Providers
-│   └── View
-├── artisan
-├── bootstrap
-│   ├── app.php
-│   └── cache
-├── composer.json
-├── composer.lock
-├── config
-│   ├── app.php
-│   ├── auth.php
-│   ├── broadcasting.php
-│   ├── cache.php
-│   ├── cors.php
-│   ├── database.php
-│   ├── filesystems.php
-│   ├── fortify.php
-│   ├── hashing.php
-│   ├── jetstream.php
-│   ├── logging.php
-│   ├── mail.php
-│   ├── queue.php
-│   ├── sanctum.php
-│   ├── services.php
-│   ├── session.php
-│   └── view.php
-├── database
-│   ├── factories
-│   ├── migrations
-│   └── seeders
-├── lang
-├── node_modules
-├── package-lock.json
-├── package.json
-├── phpunit.xml
-├── postcss.config.js
-├── public
-├── reset_password.sh
-├── reset_password.sh.save
-├── resources
-├── routes
-├── storage
-├── tailwind.config.js
-├── tests
-├── vendor
-└── vite.config.js
+E_WASTE_SHOP-SYSTEM                           
+├── app                         # Core application code
+│   ├── Actions                 # Custom actions for business logic
+│   ├── Console                 # Artisan commands
+│   ├── Events                  # Event classes
+│   ├── Exceptions              # Exception handling
+│   ├── Http                    # Controllers, middleware, requests
+│   ├── Models                  # Eloquent models
+│   ├── Providers               # Service providers
+│   └── View                    # View components
+├── artisan                     # Artisan CLI script
+├── bootstrap                   # Framework bootstrap files
+│   ├── app.php                 # Bootstrap the application
+│   └── cache                   # Cached files for performance
+├── composer.json               # Composer dependencies configuration
+├── composer.lock               # Locked versions of Composer dependencies
+├── config                      # Configuration files
+│   ├── app.php                 # Application configuration
+│   ├── auth.php                # Authentication configuration
+│   ├── cache.php               # Cache configuration
+│   ├── database.php            # Database configuration
+│   ├── fortify.php             # Fortify configuration (security)
+│   ├── hashing.php             # Password hashing configuration
+│   ├── jetstream.php           # Jetstream configuration (auth)
+│   ├── logging.php             # Logging configuration
+│   ├── mail.php                # Mail configuration
+│   ├── session.php             # Session configuration
+│   └── view.php                # View configuration
+│   └── …                
+├── database                    # Database-related files
+│   ├── factories               # Model factories for testing
+│   ├── migrations              # Database migrations
+│   └── seeders                 # Database seeders
+├── lang                        # Localization files
+├── node_modules                # Node.js dependencies
+├── package-lock.json           # Locked versions of Node.js dependencies
+├── package.json                # Node.js dependencies configuration
+├── phpunit.xml                 # PHPUnit configuration for testing
+├── postcss.config.js           # PostCSS configuration
+├── public                      # Publicly accessible files (assets)
+├── reset_password.sh           # Script for resetting passwords
+├── reset_password.sh.save      # Backup of the reset password script
+├── resources                   # Views, raw assets, and language files
+├── routes                      # Route definitions
+├── storage                     # File storage (logs, uploads, etc.)
+├── tailwind.config.js          # Tailwind CSS configuration
+├── tests                       # Automated tests
+├── vendor                      # Composer dependencies
+└── vite.config.js              # Vite configuration for frontend assets
+├── README.md                   # Project overview and instructions
+
+
 ```
 
 ## License
