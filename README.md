@@ -1,4 +1,4 @@
-# E-WasteHub
+# E-Waste-Shop
 ## A Web based Information System for Managing an E-Waste Shop
 
 ## Introduction
