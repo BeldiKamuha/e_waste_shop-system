@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This project, E-WasteHub, develops an online platform for inventory management in the electronics market. Its purpose is to reduce electronic waste (e-waste) and promote sustainability by connecting sellers of refurbished electronics with potential buyers. The platform addresses the problem of toxic environmental hazards caused by e-waste by using advanced inventory systems to track stock levels accurately, reducing excess inventory and waste from unsold electronics.
+This project, E-Waste-Shop, develops an online platform for inventory management in the electronics market. Its purpose is to reduce electronic waste (e-waste) and promote sustainability by connecting sellers of refurbished electronics with potential buyers. The platform addresses the problem of toxic environmental hazards caused by e-waste by using advanced inventory systems to track stock levels accurately, reducing excess inventory and waste from unsold electronics.
 
 ## Dependencies
 
