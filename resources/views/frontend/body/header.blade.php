@@ -57,9 +57,9 @@
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
-                    <div class="logo logo-width-1">
+                    <!-- <div class="logo logo-width-1">
                         <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
-                    </div>
+                    </div> -->
     <div class="header-right">
         <div class="search-style-2">
             <form action="#">

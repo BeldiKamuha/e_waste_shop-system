@@ -142,7 +142,7 @@
                     <h6 class="text-muted pl-20 pr-20">x {{ $item->qty }}</h6>
                     </td>
                     <td>
-                    <h4 class="text-brand">${{ $item->price }}</h4>
+                    <h4 class="text-brand">Ksh {{ $item->price }}</h4>
                     </td>
                 </tr>
                 @endforeach
@@ -177,7 +177,7 @@
 
                 <input class="form-check-input" required="" type="radio" name="payment_option" value="stripe" id="exampleRadios3" checked="">
 
-                <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Stripe</label>
+                <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Mpesa</label>
             </div>
             <div class="custome-radio">
 
@@ -188,15 +188,9 @@
             <div class="custome-radio">
                 <input class="form-check-input" value="card" required="" type="radio" name="payment_option" id="exampleRadios5" checked="">
 
-                <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Online Getway</label>
             </div>
         </div>
-        <div class="payment-logo d-flex">
-            <img class="mr-15" src="{{ asset('frontend/assets/imgs/theme/icons/payment-paypal.svg') }}" alt="">
-            <img class="mr-15" src="{{ asset('frontend/assets/imgs/theme/icons/payment-visa.svg') }}" alt="">
-            <img class="mr-15" src="{{ asset('frontend/assets/imgs/theme/icons/payment-master.svg') }}" alt="">
-            <img src="{{ asset('frontend/assets/imgs/theme/icons/payment-zapper.svg') }}" alt="">
-        </div>
+     
         <button type="submit" class="btn btn-fill-out btn-block mt-30">Place an Order<i class="fi-rs-sign-out ml-15"></i></button>
     </div>
                 </div>

@@ -298,6 +298,7 @@ $(document).ready(function() {
                 // Update subtotal and grand total in the cart summary
                 $('.cart_total_label .text-brand').text('KSH ' + total.toFixed(2));
                 $('.cart_total_amount .text-brand').text('KSH ' + total.toFixed(2));
+                $('.form_total_amount').val(total.toFixed(0));
 
                 // Attach event listeners to the remove buttons
                 $('.cartRemove').on('click', function() {

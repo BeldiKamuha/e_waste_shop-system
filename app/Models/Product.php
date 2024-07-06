@@ -15,4 +15,5 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'supplier_id');
     }
+
 }

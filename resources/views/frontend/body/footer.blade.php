@@ -1,5 +1,5 @@
 <footer class="main">
-        <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
+        <!-- <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -20,8 +20,10 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="featured section-padding">
+        </section> -->
+
+
+        <!-- <section class="featured section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 mb-md-4 mb-xl-0">
@@ -92,7 +94,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">

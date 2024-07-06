@@ -48,11 +48,17 @@
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">All Order</div>
+						<div class="menu-title">Order Manage</div>
 					</a>
 					<ul>
-					<li> <a href="{{ route('supplier.order') }}"><i class="bx bx-right-arrow-alt"></i>Supplier Order</a>
+					<li> <a href="{{ route('supplier.order') }}"><i class="bx bx-right-arrow-alt"></i>Pending Order</a>
 						
+						</li>
+						<li> <a href="{{ route('supplier.confirmed.order') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
+						</li>
+						<li> <a href="{{ route('supplier.processing.order') }}"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
+						</li>
+						<li> <a href="{{ route('supplier.delivered.order') }}"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
 						</li>
 					</ul>
 				</li>

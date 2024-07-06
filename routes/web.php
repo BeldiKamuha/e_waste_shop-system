@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MpesaController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
 use App\Http\Controllers\Backend\SupplierOrderController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\AllCustomerController;
+
 
 
 
@@ -64,8 +66,13 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
     // Stripe All Route 
     Route::controller(StripeController::class)->group(function(){
     Route::post('/cash/order' , 'CashOrder')->name('cash.order');
-
 }); 
+
+// M-PESA all route
+Route::controller(MpesaController::class)->group(function(){
+    Route::post('/mpesa/order', 'stk')->name('mpesa.order');
+    Route::post('/mpesa/stk-status', 'checkStkStatus')->name('mpesa.stk.status');
+});
 
 // Customer Dashboard All Route 
     Route::controller(AllCustomerController::class)->group(function(){
@@ -111,8 +118,13 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
 
 
  // Brand All Route 
-Route::controller(SupplierOrderController::class)->group(function(){
+    Route::controller(SupplierOrderController::class)->group(function(){
     Route::get('/supplier/order' , 'SupplierOrder')->name('supplier.order');
+    Route::get('/supplier/order/details/{order_id}', 'SupplierOrderDetails')->name('supplier.order.details');
+    Route::get('/supplier/confirmed/order' , 'SupplierConfirmedOrder')->name('supplier.confirmed.order');
+    Route::get('/supplier/processing/order' , 'SupplierProcessingOrder')->name('supplier.processing.order');
+    Route::get('/supplier/delivered/order' , 'SupplierDeliveredOrder')->name('supplier.delivered.order');
+
 
 
 });
@@ -208,6 +220,10 @@ Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
 Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 // Checkout Page Route 
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+// Mpsa  Route 
+Route::get('/pay', [MpesaController::class, 'stk']);
+
 
 
 
