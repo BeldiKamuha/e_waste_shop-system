@@ -38,21 +38,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($orderitem as $key => $item)        
-                            <tr>
-                                <td>{{ $key+1 }}</td>
-                                <td>{{ $item->order->order_date }}</td>
-                                <td>{{ $item->order->invoice_no }}</td>
-                                <td>Ksh {{ $item->qty * $item->price }}</td>
-                                <td>{{ $item->order->payment_method }}</td>
-                                <td><span class="badge rounded-pill bg-success">{{ $item->order->status }}</span></td> 
-                                <td>
-                                    <a href="{{ route('supplier.order.details', [$item->order->id, $item->id]) }}" class="btn btn-info" title="Details">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td> 
-                            </tr>
-                        @endforeach
+                    @foreach($orders as $order)
+    @foreach($order->orderItems as $item)
+        <tr>
+            <td>{{ $loop->parent->index + 1 }}</td>
+            <td>{{ $order->order_date }}</td>
+            <td>{{ $order->invoice_no }}</td>
+            <td>Ksh {{ $item->qty * $item->price }}</td>
+            <td>{{ $order->payment_method }}</td>
+            <td><span class="badge rounded-pill bg-success">{{ $order->status }}</span></td>
+            <td>
+                <a href="{{ route('supplier.order.details', [$order->id, $item->id]) }}" class="btn btn-info" title="Details">
+                    <i class="fa fa-eye"></i>
+                </a>
+            </td>
+        </tr>
+    @endforeach
+@endforeach
                     </tbody>
                     <tfoot>
                         <tr>

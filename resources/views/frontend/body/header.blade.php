@@ -1,9 +1,10 @@
 <!-- Header  -->
+
 <header class="header-area header-style-1 header-height-2">
-        <div class="mobile-promotion">
+        <!-- <div class="mobile-promotion">
             <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
-        </div>
-        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+        </div> 
+         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
@@ -54,18 +55,22 @@
                 </div>
             </div>
         </div>
-        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block"> -->
+        <br/>
+        @php
+$setting = App\Models\SiteSetting::find(1);
+        @endphp
             <div class="container">
                 <div class="header-wrap">
-                    <!-- <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
-                    </div> -->
+                    <div class="logo logo-width-1">
+                    <a href="/"><img src="{{ asset($setting->logo)   }}" alt="logo" /></a>
+                    </div>
     <div class="header-right">
         <div class="search-style-2">
             <form action="#">
                 <select class="select-active">
-                    <option>All Categories</option>
-                    <option>Milks and Dairies</option>
+                    <option>All Products</option>
+                    <!-- <option>Milks and Dairies</option>
                     <option>Wines & Alcohol</option>
                     <option>Clothing & Beauty</option>
                     <option>Pet Foods & Toy</option>
@@ -74,7 +79,7 @@
                     <option>Vegetables</option>
                     <option>Fresh Seafood</option>
                     <option>Noodles & Rice</option>
-                    <option>Ice cream</option>
+                    <option>Ice cream</option> -->
                 </select>
                 <input type="text" placeholder="Search for items..." />
             </form>
@@ -113,7 +118,7 @@
                 
 
                 <div class="header-action-icon-2">
-                    <a class="mini-cart-icon" href="shop-cart.html">
+                    <a class="mini-cart-icon" href="{{ route('mycart') }}">
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
                         <span class="pro-count blue">0</span>
                     </a>
@@ -135,10 +140,10 @@
                             <div class="shopping-cart-total">
                                 <h4>Total <span>Ksh 00.00</span></h4>
                             </div>
-                            <div class="shopping-cart-button">
+                            <!-- <div class="shopping-cart-button">
                                 <a href="shop-cart.html" class="outline">View cart</a>
                                 <a href="shop-checkout.html">Checkout</a>
-                            </div>
+                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -146,12 +151,12 @@
 
 
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <a href="{{ route('dashboard') }}">
                                         <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-user.svg') }}" />
                                     </a>
                                   
                                     @auth
-    <a href="#"><span class="lable ml-0">Account</span></a>
+    <a href="{{ route('dashboard') }}"><span class="lable ml-0">Account</span></a>
 
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                         
@@ -160,7 +165,7 @@
                 <li>
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
                 </li>
                 <li>
@@ -170,7 +175,7 @@
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                    <a href="{{ route('dashboard') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a> -->
                 </li>
                 <li>
                     <a href="{{ route('customer.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
@@ -202,7 +207,7 @@
 
 
 
-        <div class="header-bottom header-bottom-bg-color sticky-bar">
+        <!-- <div class="header-bottom header-bottom-bg-color sticky-bar">
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
@@ -501,7 +506,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </header>
 
    <!-- End Header  -->

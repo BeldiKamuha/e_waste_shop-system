@@ -10,14 +10,24 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SupplierOrderController extends Controller
 {
-    public function SupplierOrder(){
-
-        $id = Auth::user()->id;
-        $orderitem = OrderItem::with('order')->where('supplier_id',$id)->orderBy('id','DESC')->get();
-        return view('supplier.backend.orders.pending_orders',compact('orderitem'));
+    public function SupplierPendingOrder(){
+        $supplier_id = Auth::user()->id;
+        
+        // Fetch the orders with status 'pending' where the supplier ID matches
+        $orders = Order::where('status', 'pending')
+                        ->whereHas('orderItems', function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        })
+                        ->with(['orderItems' => function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        }])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+        return view('supplier.backend.orders.pending_orders',compact('orders'));
     } // End Method 
 
     public function SupplierOrderDetails($order_id) {
@@ -36,39 +46,114 @@ class SupplierOrderController extends Controller
         // Fetch the order items where the order ID matches and the supplier ID matches
         $orderItems = OrderItem::with('product')->where('order_id', $order_id)->where('supplier_id', $supplier_id)->orderBy('id', 'DESC')->get();
     
-        return view('backend.orders.supplier_order_details', compact('order', 'orderItems'));
+        return view('supplier.backend.orders.supplier_order_details', compact('order', 'orderItems'));
     }// End Method 
 
-    public function SupplierConfirmedOrder(){
-        $supplierId = Auth::user()->id;
-        $orderitem = Order::where('status', 'confirm')
-                            ->whereHas('orderItems', function($query) use ($supplierId) {
-                                $query->where('supplier_id', $supplierId);
-                            })
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        return view('backend.orders.confirmed_orders', compact('orderitem'));
-    } // End Method
+    public function SupplierConfirmedOrder()
+    {
+        $supplier_id = Auth::user()->id;
+        
+        // Fetch the orders with status 'confirm' where the supplier ID matches
+        $orders = Order::where('status', 'confirm')
+                        ->whereHas('orderItems', function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        })
+                        ->with(['orderItems' => function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        }])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+        
+        return view('supplier.backend.orders.confirmed_orders', compact('orders'));
+    }// End Method  
     
     public function SupplierProcessingOrder(){
-        $supplierId = Auth::user()->id;
-        $orderitem = Order::where('status', 'processing')
-                            ->whereHas('orderItems', function($query) use ($supplierId) {
-                                $query->where('supplier_id', $supplierId);
-                            })
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        return view('backend.orders.processing_orders', compact('orderitem'));
+
+        $supplier_id = Auth::user()->id;
+        
+        // Fetch the orders with status 'processing' where the supplier ID matches
+        $orders = Order::where('status', 'processing')
+                        ->whereHas('orderItems', function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        })
+                        ->with(['orderItems' => function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        }])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+        return view('supplier.backend.orders.processing_orders', compact('orders'));
     } // End Method
     
     public function SupplierDeliveredOrder(){
-        $supplierId = Auth::user()->id;
-        $orderitem = Order::where('status', 'deliverd')
-                            ->whereHas('orderItems', function($query) use ($supplierId) {
-                                $query->where('supplier_id', $supplierId);
-                            })
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        return view('backend.orders.delivered_orders', compact('orderitem'));
+
+        $supplier_id = Auth::user()->id;
+        
+        // Fetch the orders with status 'delivered' where the supplier ID matches
+        $orders = Order::where('status', 'delivered')
+                        ->whereHas('orderItems', function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        })
+                        ->with(['orderItems' => function ($query) use ($supplier_id) {
+                            $query->where('supplier_id', $supplier_id);
+                        }])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+        return view('supplier.backend.orders.delivered_orders', compact('orders'));
     } // End Method
+
+    public function PendingToConfirm($order_id){
+        Order::findOrFail($order_id)->update(['status' => 'confirm']);
+
+        $notification = array(
+            'message' => 'Order Confirm Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('supplier.confirmed.order')->with($notification); 
+
+
+    }// End Method 
+
+    public function ConfirmToProcess($order_id){
+        Order::findOrFail($order_id)->update(['status' => 'processing']);
+
+        $notification = array(
+            'message' => 'Order Processing Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('supplier.processing.order')->with($notification); 
+
+
+    }// End Method 
+
+    public function ProcessToDelivered($order_id){
+        Order::findOrFail($order_id)->update(['status' => 'delivered']);
+
+        $notification = array(
+            'message' => 'Order Delivered Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('supplier.delivered.order')->with($notification); 
+
+
+    }// End Method 
+
+    public function SupplierInvoiceDownload($order_id){
+
+        $order = Order::with('user')->where('id',$order_id)->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+    
+        $pdf = Pdf::loadView('supplier.backend.orders.supplier_order_invoice', compact('order','orderItem'))->setPaper('a4')->setOption([
+                'tempDir' => public_path(),
+                'chroot' => public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
+    
+    }// End Method
+
 }
+
+
+ 

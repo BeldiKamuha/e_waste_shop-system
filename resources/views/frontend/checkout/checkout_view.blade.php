@@ -1,10 +1,14 @@
 @extends('frontend.master_dashboard')
 @section('main')
 
+@section('title')
+   Checkout Page 
+@endsection
+
  <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
                     <span></span> Checkout
                 </div>
             </div>
@@ -128,13 +132,10 @@
             @foreach($carts as $item) 
 
                 <tr>
-                <td class="image product-thumbnail"><img src="{{ asset($item->options->image) }} " alt="#" style="width:50px; height: 50px;" ></td>
+                
                     <td>
                     <h6 class="w-160 mb-5"><a href="shop-product-full.html" class="text-heading">{{ $item->name }}</a></h6></span>
                         <div class="product-rate-cover">
-
-                        <strong>Color :{{ $item->options->color }} </strong>
-                        <strong>Size : {{ $item->options->size }}</strong>
                              
                         </div>
                     </td>

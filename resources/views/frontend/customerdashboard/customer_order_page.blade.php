@@ -8,7 +8,7 @@
   <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> My Account
                 </div>
             </div>
@@ -63,8 +63,8 @@
             <span class="badge rounded-pill bg-info">Confirm</span>
             @elseif($order->status == 'processing')
             <span class="badge rounded-pill bg-danger">Processing</span>
-            @elseif($order->status == 'deliverd')
-            <span class="badge rounded-pill bg-success">Deliverd</span>
+            @elseif($order->status == 'delivered')
+            <span class="badge rounded-pill bg-success">Delivered</span>
             @endif
 
 

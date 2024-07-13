@@ -1,10 +1,15 @@
 @extends('frontend.master_dashboard')
 @section('main')
+
+@section('title')
+   Mpesa Payment 
+@endsection
+
 <h1>Mpesa Payment</h1>
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
+            <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
             <span></span> Mpesa Payment
         </div>
     </div>

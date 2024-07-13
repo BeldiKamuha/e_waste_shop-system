@@ -14,12 +14,6 @@ $route = Route::current()->getName();
     <a class="nav-link {{ ($route ==  'customer.order.page')? 'active':  '' }}" href="{{ route('customer.order.page') }}" ><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#track-orders" ><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#address" ><i class="fi-rs-marker mr-10"></i>My Address</a>
-    </li>
-    <li class="nav-item">
     <a class="nav-link {{ ($route ==  'customer.account.page')? 'active':  '' }}" href="{{ route('customer.account.page') }}" ><i class="fi-rs-user mr-10"></i>Account details</a>
     </li>
 

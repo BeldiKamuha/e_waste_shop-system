@@ -33,7 +33,6 @@
     </main>
      
 
-
  @include('frontend.body.footer')
 
     <!-- Preloader Start -->

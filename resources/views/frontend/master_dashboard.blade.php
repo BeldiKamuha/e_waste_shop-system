@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>E-Waste Shop </title>
+    <title> @yield('title')</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,9 +106,7 @@ $(document).ready(function() {
                     miniCartHtml += `
                         <ul>
                             <li>
-                                <div class="shopping-cart-img">
-                                    <a href="shop-product-right.html"><img alt="${value.name}" src="${value.options.image}" style="width:50px;height:50px;" /></a>
-                                </div>
+                        
                                 <div class="shopping-cart-title" style="margin-left: 10px;">
                                     <h4><a href="shop-product-right.html">${value.name}</a></h4>
                                     <h4><span>${value.qty} × </span>${value.price}</h4>
@@ -255,20 +253,15 @@ $(document).ready(function() {
                         rows += `
                             <tr class="pt-30">
                                 <td class="custome-checkbox pl-30"></td>
-                                <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
+                                
                                 <td class="product-des product-name">
                                     <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name}</a></h6>
                                 </td>
                                 <td class="price" data-title="Price">
                                     <h4 class="text-body">Ksh ${value.price}</h4>
                                 </td>
-                                <td class="price" data-title="Color">
-                                    ${value.options.color == null ? `<span>....</span>` : `<h6 class="text-body">${value.options.color}</h6>`}
-                                </td>
-                                <td class="price" data-title="Size">
-                                    ${value.options.size == null ? `<span>....</span>` : `<h6 class="text-body">${value.options.size}</h6>`}
-                                </td>
-                                <td class="text-center detail-info" data-title="Stock">
+                               
+                                <td class="text-left detail-info" data-title="Stock">
                                     <div class="detail-extralink mr-15">
                                         <div class="detail-qty border radius">
                                             <a href="#" class="qty-down" data-rowid="${value.rowId}"><i class="fi-rs-angle-small-down"></i></a>
@@ -280,7 +273,7 @@ $(document).ready(function() {
                                 <td class="price" data-title="Subtotal">
                                     <h4 class="text-brand">Ksh ${value.subtotal}</h4>
                                 </td>
-                                <td class="action text-center" data-title="Remove"><a href="#" class="text-body cartRemove" id="${value.rowId}"><i class="fi-rs-trash"></i></a></td>
+                                <td class="action text-left" data-title="Remove"><a href="#" class="text-body cartRemove" id="${value.rowId}"><i class="fi-rs-trash"></i></a></td>
                             </tr> `;
                         total += parseFloat(value.subtotal);
                     });

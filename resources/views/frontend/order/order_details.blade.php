@@ -8,7 +8,7 @@
   <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> My Account
                 </div>
             </div>
@@ -100,11 +100,6 @@
                        <th>{{ $order->payment_method }}</th>
                     </tr>
 
-                    
-                    <tr>
-                        <th>Transx ID:</th>
-                       <th>{{ $order->transaction_id }}</th>
-                    </tr>
 
                     <tr>
                         <th>Invoice:</th>
@@ -166,12 +161,7 @@
             <td class="col-md-2">
                 <label>Product Code  </label>
             </td>
-            <td class="col-md-1">
-                <label>Color </label>
-            </td>
-            <td class="col-md-1">
-                <label>Size </label>
-            </td>
+            
             <td class="col-md-1">
                 <label>Quantity </label>
             </td>
@@ -204,25 +194,6 @@
             <td class="col-md-2">
                 <label>{{ $item->product->product_code }} </label>
             </td>
-            @if($item->color == NULL)
-             <td class="col-md-1">
-                <label>.... </label>
-            </td>
-            @else
-            <td class="col-md-1">
-                <label>{{ $item->color }} </label>
-            </td>
-            @endif
-
-            @if($item->size == NULL)
-             <td class="col-md-1">
-                <label>.... </label>
-            </td>
-            @else
-            <td class="col-md-1">
-                <label>{{ $item->size }} </label>
-            </td>
-            @endif
             <td class="col-md-1">
                 <label>{{ $item->qty }} </label>
             </td>

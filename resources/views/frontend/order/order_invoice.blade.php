@@ -81,7 +81,6 @@
           <p class="font">
           <h3><span style="color: green;">Invoice:</span> #{{ $order->invoice_no }}</h3>
             Order Date: {{ $order->order_date }} <br>
-             Delivery Date: {{ $order->delivered_date }} <br>
             Payment Type : {{ $order->payment_method }} </span>
          </p>
         </td>
@@ -96,8 +95,6 @@
       <tr class="font">
         <th>Image</th>
         <th>Product Name</th>
-        <th>Size</th>
-        <th>Color</th>
         <th>Code</th>
         <th>Quantity</th>
         <th>Supplier</th>
@@ -115,18 +112,7 @@
 
         </td>
         <td align="center">{{ $item->product->product_name }}</td>
-
-         @if($item->color == NULL)
-         <td align="center"> ...</td>
-         @else
-          <td align="center"> {{ $item->color }}</td>
-         @endif
-
-         @if($item->size == NULL)
-         <td align="center"> ...</td>
-         @else
-          <td align="center"> {{ $item->size }}</td>
-         @endif
+        
         <td align="center">{{ $item->product->product_code }}</td>
         <td align="center">{{ $item->qty }}</td>
 

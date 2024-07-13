@@ -279,6 +279,76 @@
             }
         });
     });
+
+	 // Confirm order
+
+    $(document).ready(function() {
+        $('.confirm-order').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            Swal.fire({
+                title: 'Are you sure to Confirm?',
+                text: "Once Confirm, You will not be able to pending again?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Confirm!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+
+	 // Processing order
+
+	 $(document).ready(function() {
+        $('.process-order').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            Swal.fire({
+                title: 'Are you sure to Processing?',
+                text: "Once Processing, You will not be able to pending again?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Processing!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+
+	 // Delivered order
+
+	 $(document).ready(function() {
+        $('.delivered-order').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            Swal.fire({
+                title: 'Are you sure to Delivered?',
+                text: "Once Delivered, You will not be able to pending again?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Delivered!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+
 </script>
 
 </body>

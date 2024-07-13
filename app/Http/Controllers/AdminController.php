@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\models\User;
 use Illuminate\Support\Facades\Hash;
 
+use App\Notifications\SupplierApproveNotification;
+use Illuminate\Support\Facades\Notification;
+
 class AdminController extends Controller
 {
     public function AdminDashboard(){
@@ -128,6 +131,8 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
+        $suser = User::where('role','supplier')->get();
+        Notification::send($suser, new SupplierApproveNotification($request));
         return redirect()->route('active.supplier')->with($notification);
 
     }// End Mehtod 

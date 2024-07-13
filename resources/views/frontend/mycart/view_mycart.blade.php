@@ -1,10 +1,14 @@
 @extends('frontend.master_dashboard')
 @section('main')
 
+@section('title')
+   MyCart Page 
+@endsection
+
  <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a> 
                     <span></span> Cart
                 </div>
             </div>
@@ -28,10 +32,8 @@
                 <thead>
                     <tr class="main-heading">
                         <th class="custome-checkbox start pl-30"></th>
-                        <th scope="col" colspan="2">Product</th>
+                        <th scope="col">Product</th>
                         <th scope="col">Unit Price</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Size</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Subtotal</th>
                         <th scope="col" class="end">Remove</th>

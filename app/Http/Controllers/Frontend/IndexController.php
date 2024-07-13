@@ -25,4 +25,11 @@ class IndexController extends Controller
 
     } // End Method
 
+   // Example controller method
+public function index()
+{
+    $sproduct = Product::all(); // Or whatever query you need to get the products
+    return view('frontend.index', compact('sproduct'));
+}// End Method 
+
 }

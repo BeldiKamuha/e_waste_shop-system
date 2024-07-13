@@ -13,7 +13,7 @@
 			<ul class="metismenu" id="menu">
 			<li>
 					<a href="{{route('admin.dashboard')}}">
-						<div class="parent-icon"><i class='bx bx-cookie'></i>
+						<div class="parent-icon"><i class='bx bx-home'></i>
 						</div>
 						<div class="menu-title">Dashboard</div>
 					</a>
@@ -38,7 +38,7 @@
 						</li>
 					</ul>
 				</li> -->
-				<li>
+				<!-- <li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
@@ -49,7 +49,7 @@
 						</li>
 						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
 						</li>
-						<!-- <li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
+						<li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
 						</li>
 						<li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>
 						</li>
@@ -58,9 +58,9 @@
 						<li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
 						</li>
 						<li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
-						</li> -->
+						</li>
 					</ul>
-				</li>
+				</li> -->
 				<li class="menu-label">UI Elements</li>
 				
 				<li>
@@ -82,7 +82,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class='bx bx-user icon'></i>
 						</div>
 						<div class="menu-title">User Manage</div>
 					</a>
@@ -210,4 +210,60 @@
 				</li>
 			</ul> -->
 			<!--end navigation-->
+
+
+			<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-cart'></i>
+						</div>
+						<div class="menu-title">Order Manage</div>
+					</a>
+					<ul>
+					<li> <a href="{{ route('pending.order') }}"><i class="bx bx-right-arrow-alt"></i>Pending Order</a>
+						
+						</li>
+						<li> <a href="{{ route('admin.confirmed.order') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
+						</li>
+						<li> <a href="{{ route('admin.processing.order') }}"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
+						</li>
+						<li> <a href="{{ route('admin.delivered.order') }}"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class="bx bx-chart"></i>
+						</div>
+						<div class="menu-title">Reports Manage</div>
+					</a>
+					<ul>
+					<li> <a href="{{ route('report.view') }}"><i class="bx bx-right-arrow-alt"></i>Report View</a>
+						</li>
+
+						<li> <a href="{{ route('order.by.user') }}"><i class="bx bx-right-arrow-alt"></i>Order By Customer</a>
+						</li>
+
+					</ul>
+				</li>
+
+				<li>
+				<a href="javascript:;" class="has-arrow">
+			<div class="parent-icon"><i class="bx bx-cog"></i>
+			</div>
+			<div class="menu-title">Setting Manage</div>
+		</a>
+		<ul>
+			<li> <a href="{{ route('site.setting') }}"><i class="bx bx-right-arrow-alt"></i>Site Setting</a>
+			</li>
+
+				<!-- <li> <a href=""><i class="bx bx-right-arrow-alt"></i>Publish Review</a>
+			</li> -->
+
+
+		</ul>
+	</li>
+
 		</div>
+
+		

@@ -14,6 +14,9 @@ use Illuminate\Http\RedirectResponse;
 use App\Events\Supplier;
 use App\Http\Requests\SupplierRegisterRequest;
 
+use App\Notifications\SupplierRegNotification;
+use Illuminate\Support\Facades\Notification;
+
 class SupplierController extends Controller
 {
     public function SupplierDashboard()
@@ -106,6 +109,8 @@ class SupplierController extends Controller
 
     public function SupplierRegister(Request $request)
 {
+
+    $suser = User::where('role','admin')->get();
     $request->validate([
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -134,6 +139,7 @@ class SupplierController extends Controller
 
     Auth::login($user); // Logs in the user
 
+    Notification::send($suser, new SupplierRegNotification($request));
     return redirect()->route('verification.notice')->with('dashboard', 'supplier')->with($notification);
 
     

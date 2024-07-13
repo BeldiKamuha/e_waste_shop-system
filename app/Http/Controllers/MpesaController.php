@@ -16,11 +16,16 @@ use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
+use App\Models\User;
+use App\Notifications\OrderComplete;
+use Illuminate\Support\Facades\Notification;
 
 class MpesaController extends Controller
 {
     public function stk(Request $request)
     {
+
+        $user = User::where('role','admin')->get();
         // Instantiate the Mpesa class
         $mpesa = new Mpesa();
 
@@ -122,6 +127,8 @@ class MpesaController extends Controller
             'message' => 'Your Order Place Successfully',
             'alert-type' => 'success'
         );
+
+        Notification::send($user, new OrderComplete($request->name));
         return redirect()->route('dashboard')->with($notification); 
     }
 }
