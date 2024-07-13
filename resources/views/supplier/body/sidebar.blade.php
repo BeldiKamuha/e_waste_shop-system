@@ -21,7 +21,7 @@
 
 					<li>
 					<a href="{{ route('supplier.dashboard') }}">
-						<div class="parent-icon"><i class='bx bx-cookie'></i>
+						<div class="parent-icon"><i class='bx bx-home'></i>
 						</div>
 						<div class="menu-title">Dashboard</div>
 					</a>
@@ -31,7 +31,7 @@
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						<div class="parent-icon"><i class='bx bx-box'></i>
 						</div>
 						<div class="menu-title">Product Manage</div>
 					</a>
@@ -46,16 +46,19 @@
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="bx bx-cart"></i>
 						</div>
-						<div class="menu-title">All Order</div>
+						<div class="menu-title">Order Manage</div>
 					</a>
 					<ul>
-						<li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
-						</li>
-						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
-						</li>
+					<li> <a href="{{ route('supplier.pending.order') }}"><i class="bx bx-right-arrow-alt"></i>Pending Order</a>
 						
+						</li>
+						<li> <a href="{{ route('supplier.confirmed.order') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
+						</li>
+						<li> <a href="{{ route('supplier.processing.order') }}"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
+						</li>
+						<li> <a href="{{ route('supplier.delivered.order') }}"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
 						</li>
 					</ul>
 				</li>
@@ -67,13 +70,13 @@
 				@endif
 
 
-				<li>
+				<!-- <li>
 					<a href=" " target="_blank">
 						<div class="parent-icon"><i class="bx bx-support"></i>
 						</div>
 						<div class="menu-title">Support</div>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<!--end navigation-->
 		</div>

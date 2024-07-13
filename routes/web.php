@@ -2,14 +2,26 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\NewPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\MpesaController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\SupplierProductController;
+use App\Http\Controllers\Backend\SupplierOrderController;
+use App\Http\Controllers\Backend\AdminOrderController;
+use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\AllCustomerController;
+
+
+
 
 
 
@@ -43,7 +55,40 @@ Route::post('/customer/profile/store', [CustomerController::class, 'CustomerProf
 Route::get('/customer/logout', [CustomerController::class, 'CustomerLogout'])->name('customer.logout');
 Route::post('/customer/update/password', [CustomerController::class, 'CustomerUpdatePassword'])->name('customer.update.password');
 
+    // Cart All Route 
+    Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart', 'MyCart')->name('mycart');
+    Route::get('/get-cart-product', 'GetCartProduct');
+    Route::get('/cart-remove/{rowId}', 'RemoveCartProduct');
+    Route::post('/cart-update-quantity', 'UpdateCartQuantity');
+});
+
+   //  Route for CheckoutStore
+   Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+    // Stripe All Route 
+    Route::controller(StripeController::class)->group(function(){
+    Route::post('/cash/order' , 'CashOrder')->name('cash.order');
 }); 
+
+// M-PESA all route
+Route::controller(MpesaController::class)->group(function(){
+    Route::post('/mpesa/order', 'stk')->name('mpesa.order');
+    Route::post('/mpesa/stk-status', 'checkStkStatus')->name('mpesa.stk.status');
+});
+
+// Customer Dashboard All Route 
+    Route::controller(AllCustomerController::class)->group(function(){
+    Route::get('/customer/account/page' , 'CustomerAccount')->name('customer.account.page');
+    Route::get('/customer/change/password' , 'CustomerChangePassword')->name('customer.change.password');
+    Route::get('/customer/order/page' , 'CustomerOrderPage')->name('customer.order.page');
+    Route::get('/customer/order_details/{order_id}' , 'CustomerOrderDetails');
+    Route::get('/customer/invoice_download/{order_id}' , 'CustomerOrderInvoice');
+
+});  
+
+});  // end Supplier Group middleware
+
 
 
 /// Supplier Dashboard
@@ -74,7 +119,27 @@ Route::post('/customer/update/password', [CustomerController::class, 'CustomerUp
     
     });
 
+
+ // Supplier Order All Route 
+    Route::controller(SupplierOrderController::class)->group(function(){
+    Route::get('/supplier/pending/order' , 'SupplierPendingOrder')->name('supplier.pending.order');
+    Route::get('/supplier/order/details/{order_id}', 'SupplierOrderDetails')->name('supplier.order.details');
+    Route::get('/supplier/confirmed/order' , 'SupplierConfirmedOrder')->name('supplier.confirmed.order');
+    Route::get('/supplier/processing/order' , 'SupplierProcessingOrder')->name('supplier.processing.order');
+    Route::get('/supplier/delivered/order' , 'SupplierDeliveredOrder')->name('supplier.delivered.order');
+
+    Route::get('/pending/confirm/{order_id}' , 'PendingToConfirm')->name('pending-confirm');
+    Route::get('/confirm/processing/{order_id}' , 'ConfirmToProcess')->name('confirm-processing');
+    Route::get('/processing/delivered/{order_id}' , 'ProcessToDelivered')->name('processing-delivered');
+
+    Route::get('/supplier/invoice/download/{order_id}' , 'SupplierInvoiceDownload')->name('supplier.invoice.download');
+
+
+
 });
+
+
+}); // end Supplier Group middleware
 
 
 /// Admin Dashboard
@@ -108,8 +173,53 @@ Route::controller(ActiveUserController::class)->group(function(){
     Route::get('/all/customer' , 'AllCustomer')->name('all-customer');
     Route::get('/all/supplier' , 'AllSupplier')->name('all-supplier');
 
+    // Admin Order All Route 
+    Route::controller(AdminOrderController::class)->group(function(){
+    Route::get('/pending/order' , 'PendingOrder')->name('pending.order');
+    Route::get('/admin/order/details/{order_id}' , 'AdminOrderDetails')->name('admin.order.details');
+
+    Route::get('/admin/confirmed/order' , 'AdminConfirmedOrder')->name('admin.confirmed.order');
+
+    Route::get('/admin/processing/order' , 'AdminProcessingOrder')->name('admin.processing.order');
+ 
+    Route::get('/admin/delivered/order' , 'AdminDeliveredOrder')->name('admin.delivered.order');
+
+    Route::get('/pending/confirm/{order_id}' , 'PendingToConfirm')->name('pending-confirm');
+    Route::get('/confirm/processing/{order_id}' , 'ConfirmToProcess')->name('confirm-processing');
+
+    Route::get('/processing/delivered/{order_id}' , 'ProcessToDelivered')->name('processing-delivered');
+
+    Route::get('/admin/invoice/download/{order_id}' , 'AdminInvoiceDownload')->name('admin.invoice.download');
+    
+    
+    });
+
+     // Report All Route 
+Route::controller(ReportController::class)->group(function(){
+
+    Route::get('/report/view' , 'ReportView')->name('report.view');
+    Route::post('/search/by/date' , 'SearchByDate')->name('search-by-date');
+    Route::post('/search/by/month' , 'SearchByMonth')->name('search-by-month');
+    Route::post('/search/by/year' , 'SearchByYear')->name('search-by-year');
+
+    Route::get('/order/by/user' , 'OrderByUser')->name('order.by.user');
+    Route::post('/search/by/user' , 'SearchByUser')->name('search-by-user');
+
+
+
 
 });
+
+// Site Setting All Route 
+    Route::controller(SiteSettingController::class)->group(function(){
+
+    Route::get('/site/setting' , 'SiteSetting')->name('site.setting');
+    Route::post('/site/setting/update' , 'SiteSettingUpdate')->name('site.setting.update');
+   
+   });
+
+
+}); // end Admin Group middleware
 
 
 // Password Reset Routes
@@ -153,8 +263,25 @@ require __DIR__.'/auth.php';
 
 /// Frontend Product Details All Route 
 Route::get('/supplier/details/{id}', [IndexController::class, 'SupplierDetails'])->name('supplier.details');
+Route::get('/supplier/all', [IndexController::class, 'SupplierAll'])->name('supplier.all');
+
+// Example web.php route definition
+Route::get('/', [IndexController::class, 'index']);
 
 
+
+/// Add to cart store data
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+
+// Get Data from mini Cart
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
+
+Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+// Checkout Page Route 
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+// Mpsa  Route 
+Route::get('/pay', [MpesaController::class, 'stk']);
 
 
 
@@ -162,20 +289,7 @@ Route::get('/supplier/details/{id}', [IndexController::class, 'SupplierDetails']
 
 // Group Milldeware End
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-//     Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-// Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
-// Route::get('/supplier/login', [SupplierController::class, 'SupplierLogin'])->name('supplier.login');
-
-// require __DIR__.'/auth.php';
 
 
 

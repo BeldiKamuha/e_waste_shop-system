@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Easy Shop Online Store </title>
+    <title>Login - E-Waste Shop </title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +29,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span>  My Account
                 </div>
             </div>

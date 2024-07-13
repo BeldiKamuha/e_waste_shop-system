@@ -6,8 +6,8 @@ $suppliers = App\Models\User::where('status','active')->where('role','supplier')
 
       <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
                     <h3 class="">All Our Supplier List </h3>
-                    <a class="show-all" href="shop-grid-right.html">
-                        All Vendors
+                    <a class="show-all" href="{{ route('supplier.all') }}">
+                        All Suppliers
                         <i class="fi-rs-angle-right"></i>
                     </a>
                 </div>
@@ -37,7 +37,8 @@ $suppliers = App\Models\User::where('status','active')->where('role','supplier')
                                         <div class="product-category">
                                         <span class="text-muted">Since {{ $supplier->supplier_join }}</span>
                                         </div>
-                                        <h4 class="mb-5"><a href="vendor-details-1.html">{{ $supplier->name }}</a></h4>
+                            <h4 class="mb-5"><a href="{{ route('supplier.details',$supplier->id) }}">{{ $supplier->name }}</a></h4>
+
                                         <div class="product-rate-cover">
                                            
                             @php

@@ -26,7 +26,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Become Supplier
             </div>
         </div>
@@ -41,7 +41,7 @@
                                 <div class="padding_eight_all bg-white">
                                     <div class="heading_s1">
                                         <h1 class="mb-5">Become Supplier</h1>
-                                        <p class="mb-30">Already have a Supplier account? <a href="{{ route('supplier.login') }}">Supplier Login</a></p>
+                                        <p class="mb-30">Already have a Supplier account? <a href="{{ route('login') }}">Supplier Login</a></p>
                                     </div>
             <form method="POST" action="{{ route('supplier.register') }}">
                 @csrf

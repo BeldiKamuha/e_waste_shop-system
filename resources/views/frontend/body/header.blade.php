@@ -1,9 +1,10 @@
 <!-- Header  -->
+
 <header class="header-area header-style-1 header-height-2">
-        <div class="mobile-promotion">
+        <!-- <div class="mobile-promotion">
             <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
-        </div>
-        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+        </div> 
+         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
@@ -54,18 +55,22 @@
                 </div>
             </div>
         </div>
-        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block"> -->
+        <br/>
+        @php
+$setting = App\Models\SiteSetting::find(1);
+        @endphp
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                    <a href="/"><img src="{{ asset($setting->logo)   }}" alt="logo" /></a>
                     </div>
     <div class="header-right">
         <div class="search-style-2">
             <form action="#">
                 <select class="select-active">
-                    <option>All Categories</option>
-                    <option>Milks and Dairies</option>
+                    <option>All Products</option>
+                    <!-- <option>Milks and Dairies</option>
                     <option>Wines & Alcohol</option>
                     <option>Clothing & Beauty</option>
                     <option>Pet Foods & Toy</option>
@@ -74,7 +79,7 @@
                     <option>Vegetables</option>
                     <option>Fresh Seafood</option>
                     <option>Noodles & Rice</option>
-                    <option>Ice cream</option>
+                    <option>Ice cream</option> -->
                 </select>
                 <input type="text" placeholder="Search for items..." />
             </form>
@@ -102,64 +107,56 @@
                     </form>
                 </div>
                
-                <div class="header-action-icon-2">
+                <!-- <div class="header-action-icon-2">
                     <a href="shop-wishlist.html">
                         <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                         <span class="pro-count blue">6</span>
                     </a>
                     <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                </div>
+                </div> -->
+
+                
+
                 <div class="header-action-icon-2">
-                    <a class="mini-cart-icon" href="shop-cart.html">
+                    <a class="mini-cart-icon" href="{{ route('mycart') }}">
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
-                        <span class="pro-count blue">2</span>
+                        <span class="pro-count blue">0</span>
                     </a>
-                    <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                    <a href="{{ route('mycart') }}"><span class="lable">Cart</span></a>
                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                        <ul>
-                            <li>
-                                <div class="shopping-cart-img">
-                                    <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" /></a>
-                                </div>
-                                <div class="shopping-cart-title">
-                                    <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                    <h4><span>1 × </span>$800.00</h4>
-                                </div>
-                                <div class="shopping-cart-delete">
-                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="shopping-cart-img">
-                                    <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('frontend/assets/imgs/shop/thumbnail-2.jpg') }}" /></a>
-                                </div>
-                                <div class="shopping-cart-title">
-                                    <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                    <h4><span>1 × </span>$3200.00</h4>
-                                </div>
-                                <div class="shopping-cart-delete">
-                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                </div>
-                            </li>
-                        </ul>
+
+
+                         <!--   // mini cart start with ajax -->
+
+                        <div id="miniCart">
+
+                        </div>
+
+                        <!--   // End mini cart start with ajax -->
+
+
+
                         <div class="shopping-cart-footer">
                             <div class="shopping-cart-total">
-                                <h4>Total <span>$4000.00</span></h4>
+                                <h4>Total <span>Ksh 00.00</span></h4>
                             </div>
-                            <div class="shopping-cart-button">
+                            <!-- <div class="shopping-cart-button">
                                 <a href="shop-cart.html" class="outline">View cart</a>
                                 <a href="shop-checkout.html">Checkout</a>
-                            </div>
+                            </div> -->
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <a href="{{ route('dashboard') }}">
                                         <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-user.svg') }}" />
                                     </a>
                                   
                                     @auth
-    <a href="#"><span class="lable ml-0">Account</span></a>
+    <a href="{{ route('dashboard') }}"><span class="lable ml-0">Account</span></a>
 
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                         
@@ -168,7 +165,7 @@
                 <li>
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
                 </li>
                 <li>
@@ -178,7 +175,7 @@
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                    <a href="{{ route('dashboard') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a> -->
                 </li>
                 <li>
                     <a href="{{ route('customer.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
@@ -210,11 +207,11 @@
 
 
 
-        <div class="header-bottom header-bottom-bg-color sticky-bar">
+        <!-- <div class="header-bottom header-bottom-bg-color sticky-bar">
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                       <a href="/"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -287,7 +284,7 @@
                                 <ul>
                                     
                                     <li>
-                                        <a class="active" href="index.html">Home  </a>
+                                        <a class="active" href="/">Home  </a>
                                         
                                     </li>
                                     <li>
@@ -509,7 +506,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </header>
 
    <!-- End Header  -->
@@ -542,7 +539,7 @@
                     <nav>
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
-                                <a href="index.html">Home</a>
+                                <a href="/">Home</a>
                                  
                             </li>
                             <li class="menu-item-has-children">

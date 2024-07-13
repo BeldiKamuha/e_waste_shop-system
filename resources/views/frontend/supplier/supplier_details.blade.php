@@ -1,10 +1,14 @@
 @extends('frontend.master_dashboard')
 @section('main')
 
+@section('title')
+   Supplier Details Page 
+@endsection
+
   <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Store <span></span> Supplier Details Page
                 </div>
             </div>
@@ -108,13 +112,12 @@
                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                 </div>
                 <div>
-                    @if($product->supplier_id == NULL)
+
+                @if($product->supplier_id == NULL)
 <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
                     @else
-  <span class="font-small text-muted">By <a href="vendor-details-1.html"></a></span>
-
+  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['supplier']['name'] }}</a></span>
                     @endif
-
 
 
                 </div>
@@ -122,22 +125,32 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>Ksh {{ $product->selling_price }}</span>
 
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>Ksh {{ $product->discount_price }}</span>
+                        <span class="old-price">Ksh {{ $product->selling_price }}</span>
                     </div>
                     @endif
 
 
 
                     <div class="add-cart">
-                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                    </div>
+<form action="{{ url('/cart/data/store/'.$product->id) }}" method="POST" class="add-to-cart-form">
+    @csrf
+    <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+    <input type="hidden" name="product_id" value="{{ $product->id }}">
+    <input type="hidden" name="color" value="{{ $product->color }}">
+    <input type="hidden" name="size" value="{{ $product->size }}">
+    <input type="hidden" name="quantity" value="1"> <!-- Default quantity -->
+    <input type="hidden" name="supplier_id" value="{{ $product->supplier_id }}"> <!-- Supplier ID -->
+    <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add</button>
+</form>
+</div>
+
                 </div>
             </div>
         </div>
