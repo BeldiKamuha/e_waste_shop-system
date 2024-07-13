@@ -1,66 +1,192 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-Waste-Shop
+## A Web based Information System for Managing an E-Waste Shop
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introduction
 
-## About Laravel
+This project, E-Waste-Shop, develops an online platform for inventory management in the electronics market. Its purpose is to reduce electronic waste (e-waste) and promote sustainability by connecting sellers of refurbished electronics with potential buyers. The platform addresses the problem of toxic environmental hazards caused by e-waste by using advanced inventory systems to track stock levels accurately, reducing excess inventory and waste from unsold electronics.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Dependencies
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+For the following system, it requires the following technologies:
+- Laravel framework
+- PHP (8.2 or higher)
+- Composer
+- Apache server or XAMPP
+- Preferred IDE
+- Jetstream
+- DOMPDF Wrapper for Laravel
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
+In order to install PHP click [here](https://www.php.net/downloads) and as for [composer](https://getcomposer.org) click on the link.
 
-## Learning Laravel
+### Install Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+After you have installed PHP and Composer, you may create a new Laravel project via Composer's create-project command:
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+composer create-project laravel/laravel example-app
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+Or, you may create new Laravel projects by globally installing the Laravel installer via Composer:
+```
+composer global require laravel/installer
+ 
+laravel new example-app
+```
+Once the project has been created, start Laravel's local development server using Laravel Artisan's serve command:
+```
+cd example-app
+ 
+php artisan serve
+```
+Once you have started the Artisan development server, your application will be accessible in your web browser at http://localhost:8000. 
 
-## Laravel Sponsors
+### Install Jetstream
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Install Jetstream With Livewire ​
 
-### Premium Partners
+```
+php artisan jetstream:install livewire
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+If you would like "teams" support, you can provide the --teams directive to the install command:
 
-## Contributing
+```
+php artisan jetstream:install livewire --teams
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Or, Install Jetstream With Inertia ​
 
-## Code of Conduct
+```
+php artisan jetstream:install inertia
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+If you would like "teams" support with the Inertia stack, provide the --teams directive to the install command:
 
-## Security Vulnerabilities
+```
+php artisan jetstream:install inertia --teams
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Dark Mode ​
+
+If you would like to include "dark mode" support when scaffolding your application's frontend, provide the --dark directive when executing the jetstream:install command:
+
+```
+php artisan jetstream:install livewire --dark
+```
+
+Finalizing the Installation ​
+
+After installing Jetstream, you should install and build your NPM dependencies and migrate your database:
+
+```
+npm install
+npm run build
+php artisan migrate
+```
+### Install DOMPDF Wrapper for Laravel
+Require this package in your composer.json and update composer. This will download the package and the dompdf + fontlib libraries also.
+```
+composer require barryvdh/laravel-dompdf
+```
+#### Using
+You can create a new DOMPDF instance and load a HTML string, file or view name. You can save it to a file, or stream (show in browser) or download.
+```
+    use Barryvdh\DomPDF\Facade\Pdf;
+    $pdf = Pdf::loadView('frontend.order.order_invoice', compact('order','orderItem'))->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+    ]);
+    return $pdf->download('invoice.pdf');
+```
+
+
+
+## Usage
+1. Clone the repo and cd into it
+2. In your terminal `composer install`
+3. Rename or copy `.env.example` file to `.env`
+4. `php artisan key:generate`
+5. Set your database credentials in your .env file 
+6. Import db file(database/e_waste_shop.sql) into your database (mysql,sql)
+7. `npm install`
+8. `npm run watch`
+9. Edit .env file :- remove APP_URL
+10. `php artisan serve` or use virtual host
+11. Visit `localhost:8000` in your browser
+12. Visit /admin if you want to access the admin panel. Admin Email/Password: `admin@gmail.com`/`12345678`. User Email/Password: `user@gmail.com`/`12345678`
+
+
+## Project Structure
+
+```
+E_WASTE_SHOP-SYSTEM                           
+├── app                         # Core application code
+│   ├── Actions                 # Custom actions for business logic
+│   ├── Console                 # Artisan commands
+│   ├── Events                  # Event classes
+│   ├── Exceptions              # Exception handling
+│   ├── Http                    # Controllers, middleware, requests
+│   ├── Models                  # Eloquent models
+│   ├── Providers               # Service providers
+│   └── View                    # View components
+├── artisan                     # Artisan CLI script
+├── bootstrap                   # Framework bootstrap files
+│   ├── app.php                 # Bootstrap the application
+│   └── cache                   # Cached files for performance
+├── composer.json               # Composer dependencies configuration
+├── composer.lock               # Locked versions of Composer dependencies
+├── config                      # Configuration files
+│   ├── app.php                 # Application configuration
+│   ├── auth.php                # Authentication configuration
+│   ├── cache.php               # Cache configuration
+│   ├── database.php            # Database configuration
+│   ├── fortify.php             # Fortify configuration (security)
+│   ├── hashing.php             # Password hashing configuration
+│   ├── jetstream.php           # Jetstream configuration (auth)
+│   ├── logging.php             # Logging configuration
+│   ├── mail.php                # Mail configuration
+│   ├── session.php             # Session configuration
+│   └── view.php                # View configuration
+│   └── …                
+├── database                    # Database-related files
+│   ├── factories               # Model factories for testing
+│   ├── migrations              # Database migrations
+│   └── seeders                 # Database seeders
+├── lang                        # Localization files
+├── node_modules                # Node.js dependencies
+├── package-lock.json           # Locked versions of Node.js dependencies
+├── package.json                # Node.js dependencies configuration
+├── phpunit.xml                 # PHPUnit configuration for testing
+├── postcss.config.js           # PostCSS configuration
+├── public                      # Publicly accessible files (assets)
+├── reset_password.sh           # Script for resetting passwords
+├── reset_password.sh.save      # Backup of the reset password script
+├── resources                   # Views, raw assets, and language files
+├── routes                      # Route definitions
+├── storage                     # File storage (logs, uploads, etc.)
+├── tailwind.config.js          # Tailwind CSS configuration
+├── tests                       # Automated tests
+├── vendor                      # Composer dependencies
+└── vite.config.js              # Vite configuration for frontend assets
+├── README.md                   # Project overview and instructions
+
+
+```
 
 ## License
+E-WasteHub is completely free and released under the [MIT license](https://opensource.org/licenses/MIT).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+
+
+
+
+
+
+
+
+
